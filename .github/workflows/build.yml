@@ -50,6 +50,10 @@ jobs:
       - name: Accept Android SDK licenses
         run: |
           SDK_ROOT=/home/runner/.buildozer/android/platform/android-sdk
+          # Install cmdline-tools first if not present
+          if [ ! -f "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" ]; then
+            yes | $SDK_ROOT/tools/bin/sdkmanager --sdk_root=$SDK_ROOT "cmdline-tools;latest"
+          fi
           yes | $SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$SDK_ROOT --licenses
           yes | $SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$SDK_ROOT "platforms;android-33" "build-tools;34.0.0" "platform-tools"
       
