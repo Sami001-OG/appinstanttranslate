@@ -52,6 +52,11 @@ jobs:
           # Create proper directory structure and move cmdline-tools
           mkdir -p "$SDK_ROOT/cmdline-tools/latest"
           mv cmdline-tools/* "$SDK_ROOT/cmdline-tools/latest/"
+          
+          # Create symlink for backward compatibility with buildozer
+          mkdir -p "$SDK_ROOT/tools/bin"
+          ln -sf "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" "$SDK_ROOT/tools/bin/sdkmanager"
+          
           rm -rf cmdline-tools commandlinetools-linux-11076708_latest.zip
           
           # Set environment variables
