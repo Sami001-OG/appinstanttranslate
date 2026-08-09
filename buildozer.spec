@@ -46,7 +46,7 @@ requirements = python3,kivy,vosk,argostranslate,SpeechRecognition,pyaudio,numpy,
 #presplash.filename = %(source.dir)s/presplash.png
 
 # (str) Icon of the application
-#icon.filename = %(source.dir)s/icon.png
+icon.filename = %(source.dir)s/icon.png
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
@@ -267,7 +267,7 @@ debug = True
 #android.release.sign = True
 
 # (str) Path to the icon file for the launcher
-#icon.filename = %(source.dir)s/icon.png
+icon.filename = %(source.dir)s/icon.png
 
 # (str) The name of the launcher activity
 #android.launcher_activity = org.kivy.android.PythonActivity
