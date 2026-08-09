@@ -42,7 +42,7 @@ jobs:
       - name: Setup Android SDK manually
         run: |
           SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
-          mkdir -p "$SDK_ROOT/tools"
+          mkdir -p "$SDK_ROOT/tools/bin"
           
           # Download cmdline-tools
           cd /tmp
