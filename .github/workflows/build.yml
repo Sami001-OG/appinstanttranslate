@@ -151,6 +151,15 @@ jobs:
           
           # Run buildozer with verbose output
           buildozer -v android debug 2>&1 | tee build.log
+          
+          # Find and copy APK to bin/ directory
+          echo "=== Finding APK ==="
+          find . -name "*.apk" -type f 2>/dev/null | head -20
+          
+          # Copy APK to bin/ for artifact upload
+          mkdir -p bin
+          find . -name "*.apk" -type f -exec cp {} bin/ \; 2>/dev/null || true
+          ls -la bin/
       
       - name: Upload APK
         if: success()
