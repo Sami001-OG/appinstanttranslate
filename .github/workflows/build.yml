@@ -137,6 +137,16 @@ jobs:
           export ANDROID_HOME="$SDK_ROOT"
           export PATH="$SDK_ROOT/cmdline-tools/latest/bin:$SDK_ROOT/tools/bin:$SDK_ROOT/platform-tools:$PATH"
           
+          # Ensure symlink exists right before buildozer runs (p4a checks this path)
+          mkdir -p "$SDK_ROOT/tools/bin"
+          ln -sf "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" "$SDK_ROOT/tools/bin/sdkmanager"
+          
+          # Verify SDK structure
+          echo "=== Final SDK Verification ==="
+          ls -la "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          ls -la "$SDK_ROOT/tools/bin/sdkmanager"
+          "$SDK_ROOT/tools/bin/sdkmanager" --version
+          
           cd $GITHUB_WORKSPACE
           
           # Run buildozer with verbose output
