@@ -266,9 +266,6 @@ debug = True
 # (bool) If True, then sign the release APK
 #android.release.sign = True
 
-# (str) Path to the icon file for the launcher
-icon.filename = %(source.dir)s/icon.png
-
 # (str) The name of the launcher activity
 #android.launcher_activity = org.kivy.android.PythonActivity
 
