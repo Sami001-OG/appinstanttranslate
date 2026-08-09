@@ -53,9 +53,13 @@ jobs:
           mkdir -p "$SDK_ROOT/cmdline-tools/latest"
           mv cmdline-tools/* "$SDK_ROOT/cmdline-tools/latest/"
           
-          # Create symlink for backward compatibility with buildozer
+          # Create symlink for backward compatibility with buildozer/p4a
           mkdir -p "$SDK_ROOT/tools/bin"
           ln -sf "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" "$SDK_ROOT/tools/bin/sdkmanager"
+          
+          # Verify symlink works
+          ls -la "$SDK_ROOT/tools/bin/sdkmanager"
+          "$SDK_ROOT/tools/bin/sdkmanager" --version
           
           rm -rf cmdline-tools commandlinetools-linux-11076708_latest.zip
           
@@ -75,6 +79,18 @@ jobs:
           ANDROID_HOME: ${{ env.ANDROID_HOME }}
         run: |
           cd $GITHUB_WORKSPACE
+          
+          # Verify SDK structure before build
+          SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
+          echo "Checking SDK structure..."
+          ls -la "$SDK_ROOT/tools/bin/sdkmanager"
+          ls -la "$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          
+          # Force buildozer to use our SDK
+          export ANDROID_SDK_ROOT=$SDK_ROOT
+          export ANDROID_HOME=$SDK_ROOT
+          export PATH="$SDK_ROOT/cmdline-tools/latest/bin:$SDK_ROOT/tools/bin:$PATH"
+          
           buildozer android debug
       
       - name: Upload APK
