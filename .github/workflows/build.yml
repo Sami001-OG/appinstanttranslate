@@ -47,6 +47,11 @@ jobs:
             gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 \
             gstreamer1.0-qt5 gstreamer1.0-pulseaudio
       
+      - name: Accept Android SDK licenses
+        run: |
+          yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --sdk_root=/home/runner/.buildozer/android/platform/android-sdk --licenses
+          yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager --sdk_root=/home/runner/.buildozer/android/platform/android-sdk "platforms;android-33" "build-tools;34.0.0" "platform-tools"
+      
       - name: Build APK
         run: |
           cd /home/runner/work/appinstanttranslate/appinstanttranslate
