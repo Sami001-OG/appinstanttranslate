@@ -43,7 +43,7 @@ requirements = python3,kivy,vosk,argostranslate,SpeechRecognition,pyaudio,numpy,
 # requirements.source = /path/to/local/folder
 
 # (str) Presplash of the application
-#presplash.filename = %(source.dir)s/presplash.png
+presplash.filename = %(source.dir)s/presplash.png
 
 # (str) Icon of the application
 icon.filename = %(source.dir)s/icon.png
