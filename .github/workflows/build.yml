@@ -42,13 +42,16 @@ jobs:
       - name: Setup Android SDK manually
         run: |
           SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
-          mkdir -p "$SDK_ROOT/tools/bin"
+          mkdir -p "$SDK_ROOT"
           
           # Download cmdline-tools
           cd /tmp
           wget -q https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
           unzip -q commandlinetools-linux-11076708_latest.zip
-          mv cmdline-tools/* "$SDK_ROOT/tools/bin/"
+          
+          # Create proper directory structure and move cmdline-tools
+          mkdir -p "$SDK_ROOT/cmdline-tools/latest"
+          mv cmdline-tools/* "$SDK_ROOT/cmdline-tools/latest/"
           rm -rf cmdline-tools commandlinetools-linux-11076708_latest.zip
           
           # Set environment variables
@@ -58,8 +61,8 @@ jobs:
       - name: Accept licenses and install SDK components
         run: |
           SDK_ROOT=$HOME/.buildozer/android/platform/android-sdk
-          yes | $SDK_ROOT/tools/bin/sdkmanager --sdk_root=$SDK_ROOT --licenses
-          $SDK_ROOT/tools/bin/sdkmanager --sdk_root=$SDK_ROOT "platforms;android-33" "build-tools;34.0.0" "platform-tools"
+          yes | $SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$SDK_ROOT --licenses
+          $SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --sdk_root=$SDK_ROOT "platforms;android-33" "build-tools;34.0.0" "platform-tools"
       
       - name: Build APK
         env:
