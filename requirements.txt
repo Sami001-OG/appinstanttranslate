@@ -1,0 +1,13 @@
+# Voice Translator APK - Requirements for buildozer
+# These are the Python packages that will be installed in the APK
+
+python3
+kivy==2.3.0
+vosk==0.3.45
+argostranslate==1.11.0
+SpeechRecognition==3.17.0
+pyaudio==0.2.14
+numpy==1.26.0
+librosa==0.10.1
+soundfile==0.12.1
+requests==2.31.0
